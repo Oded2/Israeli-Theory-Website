@@ -1,7 +1,8 @@
 <script lang="ts">
-  import Card from "$lib/components/Card.svelte";
+  import Card from "$lib/components/QuestionCard.svelte";
   import Container from "$lib/components/Container.svelte";
   import { addParams } from "../../hooks.client";
+  import Hero from "$lib/components/Hero.svelte";
   const languageResourceId = {
     en: "9a197011-adf9-45a2-81b9-d17dabdf990b",
     he: "bf7cb748-f220-474b-a4d5-2d59f93db28d",
@@ -11,6 +12,7 @@
   };
 
   const questionsPromise = fetchQuestions("en");
+  let start: boolean = false;
 
   async function fetchQuestions(lang: "he" | "ar" | "en" | "ru" | "fr") {
     const resourceId: string = languageResourceId[lang];
@@ -68,11 +70,5 @@
 </script>
 
 <main>
-  <Container>
-    {#await questionsPromise then questions}
-      {#each questions as question}
-        <Card {question}></Card>
-      {/each}
-    {/await}
-  </Container>
+  <Container></Container>
 </main>
