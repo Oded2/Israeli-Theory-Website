@@ -14,6 +14,7 @@
       <p class="py-6">
         {description}
       </p>
+      <slot />
       {#if href.length > 0}
         <a {href} class="btn btn-primary">{btnText}</a>
       {:else}

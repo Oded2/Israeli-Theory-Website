@@ -1,3 +1,9 @@
+export function randomNum(min: number, max: number) {
+    const difference: number = max - min;
+    return Math.round(Math.random() * difference + min);
+
+}
+
 export function addParams(link: URL, params: any): void {
     for (const key in params) {
         const value = params[key];
@@ -14,4 +20,16 @@ export function simplifyString(string: string): string {
     for (let i = 0; i < string.length; i++) result = string.replace(/\s/g, "").toLowerCase();
     return result;
 
+}
+export function shuffleArray<T>(arr: T[], maxLength: number): T[] {
+    const arrLength = arr.length;
+    let numUsed: number[] = [];
+    let newArray: T[] = [];
+    for (let i = 0; i < maxLength; i++) {
+        let random = randomNum(0, arrLength);
+        while (numUsed.includes(random)) random = randomNum(0, arrLength);
+        numUsed.push(random)
+        newArray.push(arr[random])
+    }
+    return newArray;
 }

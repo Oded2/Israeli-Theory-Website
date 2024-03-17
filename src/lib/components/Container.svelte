@@ -1,6 +1,6 @@
 <script lang="ts">
-  export let margin: boolean = true;
-  export let padding: boolean = false;
+  export let margin: boolean = false;
+  export let padding: boolean = true;
 </script>
 
 <div

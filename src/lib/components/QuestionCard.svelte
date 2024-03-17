@@ -8,13 +8,13 @@
     category: string;
     imageUrl: string;
   };
-
+  export let index: number;
   export let correct: boolean = false;
 </script>
 
-<div class="card w-96 bg-base-300 shadow-xl">
+<div class="card w-96 bg-base-300 shadow-xl" dir="auto">
   <div class="card-body">
-    <h2 class="card-title">{question.question}</h2>
+    <h2 class="card-title">{index}. {question.question}</h2>
     {#each question.answers as answer}
       <div class="form-control">
         <label class="label">
