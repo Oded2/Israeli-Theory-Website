@@ -12,7 +12,7 @@
   export let correct: boolean = false;
 </script>
 
-<div class="card w-96 bg-base-300 shadow-xl" dir="auto">
+<div class="card w-full bg-base-300 shadow-xl" dir="auto">
   <div class="card-body">
     <h2 class="card-title">{index + 1}. {question.question}</h2>
     {#each question.answers as answer}

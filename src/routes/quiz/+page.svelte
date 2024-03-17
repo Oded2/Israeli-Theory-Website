@@ -1,5 +1,4 @@
 <script lang="ts">
-  import FloatElement from "$lib/components/FloatElement.svelte";
   import Card from "$lib/components/QuestionCard.svelte";
   import Container from "$lib/components/Container.svelte";
   export let data;
@@ -16,13 +15,18 @@
 </script>
 
 <main>
-  <Container margin>
+  <Container>
     {#if start}
-      {#each questions as question, index}
-        <div class="mb-10 grid place-content-center">
-          <Card {question} {index} bind:correct={correct[index]}></Card>
+      <div class="grid grid-cols-4">
+        <div class="col-span-3">
+          {#each questions as question, index}
+            <div class="my-10">
+              <Card {question} {index} bind:correct={correct[index]}></Card>
+            </div>
+          {/each}
         </div>
-      {/each}
+        <div class="col-span-1 py-10 px-5"></div>
+      </div>
     {/if}
   </Container>
 </main>

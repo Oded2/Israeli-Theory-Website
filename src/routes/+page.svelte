@@ -15,7 +15,7 @@
       image={learning}
       title="Learn to Drive"
       description="Master the Israeli driver theory without a problem. Practice the test as much times as needed, and come ready for the real thing."
-      href={addParamsString(hrefs.quiz, { lang: lang })}
+      href={addParamsString(hrefs.quiz, { lang, len })}
     >
       <select class="select select-primary me-3" bind:value={lang}>
         <option value="he">Hebrew</option>
