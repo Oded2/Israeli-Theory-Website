@@ -14,11 +14,11 @@
 
 <div class="card w-96 bg-base-300 shadow-xl" dir="auto">
   <div class="card-body">
-    <h2 class="card-title">{index}. {question.question}</h2>
+    <h2 class="card-title">{index + 1}. {question.question}</h2>
     {#each question.answers as answer}
       <div class="form-control">
         <label class="label">
-          <span class="label-text">{answer}</span>
+          <span class="label-text me-1">{answer}</span>
           <input
             name="answers"
             on:change={() =>
