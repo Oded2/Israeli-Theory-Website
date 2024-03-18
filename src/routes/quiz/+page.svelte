@@ -24,7 +24,7 @@
       timer(maxSec);
     }, 1000);
   }
-  timer(1800);
+  // timer(1800);
 </script>
 
 <main>

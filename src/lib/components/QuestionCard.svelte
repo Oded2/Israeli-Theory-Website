@@ -13,6 +13,7 @@
   export let finished: boolean = false;
 
   let val: string;
+  let answered: boolean = false;
 
   function isSame(
     answer: string,
@@ -25,17 +26,25 @@
 <div class="card w-full bg-base-300 shadow-xl" dir="auto">
   <div class="card-body">
     <h2 class="card-title">{index + 1}. {question.question}</h2>
-    {#each question.answers as answer, index}
+    {#if finished && !answered}
+      <h3 class="text-error text-sm">Not answered</h3>
+    {/if}
+    {#each question.answers as answer}
       <div class="form-control">
         <label
           class="label bg-opacity-50"
           class:bg-success={finished && isSame(answer)}
-          class:bg-error={finished && !correct && isSame(val, answer)}
+          class:bg-error={finished &&
+            !correct &&
+            answered &&
+            isSame(val, answer)}
         >
           <span class="label-text me-1 text-base">{answer}</span>
           <input
-            on:change={() => (correct = isSame(answer))}
-            required={index == 0}
+            on:change={() => {
+              correct = isSame(answer);
+              answered = true;
+            }}
             type="radio"
             class="radio checked:bg-secondary"
             disabled={finished}
