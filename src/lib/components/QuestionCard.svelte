@@ -20,7 +20,7 @@
         <label class="label">
           <span class="label-text me-1">{answer}</span>
           <input
-            name="answers"
+            name={question.questionNumber}
             on:change={() =>
               (correct =
                 simplifyString(answer) ==

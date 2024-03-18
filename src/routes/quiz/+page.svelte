@@ -8,7 +8,7 @@
   const correct: boolean[] = [];
 
   let start: boolean = true;
-  let counter = { min: 0, sec: 0 };
+  let seconds = 0;
 
   function score(): number {
     let count: number = 0;
@@ -16,18 +16,14 @@
     return Math.round((count / questions.length) * 100);
   }
 
-  function timer(maxMin: number): void {
-    counter.sec++;
-    if (counter.sec == 60) {
-      counter.min++;
-      counter.sec = 0;
-    }
-    if (counter.min == maxMin) return;
+  function timer(maxSec: number): void {
+    if (seconds == maxSec) return;
     setTimeout(() => {
-      timer(maxMin);
+      seconds++;
+      timer(maxSec);
     }, 1000);
   }
-  timer(30);
+  timer(1800);
 </script>
 
 <main>
@@ -43,7 +39,7 @@
         </div>
         <div class="col-span-1 py-10 px-5">
           <h1 class="text-center font-bold text-5xl select-none cursor-default">
-            {`${counter.min.toLocaleString("en", { minimumIntegerDigits: 2 })}:${counter.sec.toLocaleString("en", { minimumIntegerDigits: 2 })}`}
+            {`${Math.floor(seconds / 60).toLocaleString("en", { minimumIntegerDigits: 2 })}:${(seconds % 60).toLocaleString("en", { minimumIntegerDigits: 2 })}`}
           </h1>
         </div>
       </div>
