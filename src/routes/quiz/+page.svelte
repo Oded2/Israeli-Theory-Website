@@ -7,11 +7,26 @@
   const correct: boolean[] = [];
 
   let start: boolean = true;
+  let counter = { min: 0, sec: 0 };
+
   function score(): number {
     let count: number = 0;
     for (let i of correct) if (i) count++;
     return Math.round((count / questions.length) * 100);
   }
+
+  function timer(maxMin: number): void {
+    counter.sec++;
+    if (counter.sec == 60) {
+      counter.min++;
+      counter.sec = 0;
+    }
+    if (counter.min == maxMin) return;
+    setTimeout(() => {
+      timer(maxMin);
+    }, 1000);
+  }
+  timer(30);
 </script>
 
 <main>
@@ -25,7 +40,11 @@
             </div>
           {/each}
         </div>
-        <div class="col-span-1 py-10 px-5"></div>
+        <div class="col-span-1 py-10 px-5">
+          <div class="text-center font-bold text-5xl">
+            {`${counter.min.toLocaleString("en", { minimumIntegerDigits: 2 })}:${counter.sec.toLocaleString("en", { minimumIntegerDigits: 2 })}`}
+          </div>
+        </div>
       </div>
     {/if}
   </Container>
