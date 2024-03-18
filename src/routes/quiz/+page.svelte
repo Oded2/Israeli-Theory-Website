@@ -8,7 +8,8 @@
   const correct: boolean[] = [];
 
   let start: boolean = true;
-  let seconds = 0;
+  let submit: boolean = false;
+  let seconds: number = 0;
 
   function score(): number {
     let count: number = 0;
@@ -17,7 +18,7 @@
   }
 
   function timer(maxSec: number): void {
-    if (seconds == maxSec) return;
+    if (seconds == maxSec || submit) return;
     setTimeout(() => {
       seconds++;
       timer(maxSec);
@@ -31,11 +32,19 @@
     {#if start}
       <div class="grid grid-cols-4">
         <div class="col-span-3">
-          {#each questions as question, index}
-            <div class="my-10">
-              <Card {question} {index} bind:correct={correct[index]}></Card>
-            </div>
-          {/each}
+          <form on:submit|preventDefault={() => (submit = true)}>
+            {#each questions as question, index}
+              <div class="my-10">
+                <Card
+                  {question}
+                  {index}
+                  finished={submit}
+                  bind:correct={correct[index]}
+                ></Card>
+              </div>
+            {/each}
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
         </div>
         <div class="col-span-1 py-10 px-5">
           <h1 class="text-center font-bold text-5xl select-none cursor-default">

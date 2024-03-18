@@ -10,23 +10,38 @@
   };
   export let index: number;
   export let correct: boolean = false;
+  export let finished: boolean = false;
+
+  let val: string;
+
+  function isSame(
+    answer: string,
+    correctAnswer: string = question.correctAnswer
+  ): boolean {
+    return simplifyString(answer) === simplifyString(correctAnswer);
+  }
 </script>
 
 <div class="card w-full bg-base-300 shadow-xl" dir="auto">
   <div class="card-body">
     <h2 class="card-title">{index + 1}. {question.question}</h2>
-    {#each question.answers as answer}
+    {#each question.answers as answer, index}
       <div class="form-control">
-        <label class="label">
-          <span class="label-text me-1">{answer}</span>
+        <label
+          class="label bg-opacity-50"
+          class:bg-success={finished && isSame(answer)}
+          class:bg-error={finished && !correct && isSame(val, answer)}
+        >
+          <span class="label-text me-1 text-base">{answer}</span>
           <input
-            name={question.questionNumber}
-            on:change={() =>
-              (correct =
-                simplifyString(answer) ==
-                simplifyString(question.correctAnswer))}
+            on:change={() => (correct = isSame(answer))}
+            required={index == 0}
             type="radio"
             class="radio checked:bg-secondary"
+            disabled={finished}
+            bind:group={val}
+            value={answer}
+            name={question.questionNumber}
           />
         </label>
       </div>
