@@ -1,6 +1,7 @@
 <script lang="ts">
   import Card from "$lib/components/QuestionCard.svelte";
   import Container from "$lib/components/Container.svelte";
+
   export let data;
 
   const questions = data.questions;
@@ -41,9 +42,9 @@
           {/each}
         </div>
         <div class="col-span-1 py-10 px-5">
-          <div class="text-center font-bold text-5xl">
+          <h1 class="text-center font-bold text-5xl select-none cursor-default">
             {`${counter.min.toLocaleString("en", { minimumIntegerDigits: 2 })}:${counter.sec.toLocaleString("en", { minimumIntegerDigits: 2 })}`}
-          </div>
+          </h1>
         </div>
       </div>
     {/if}
