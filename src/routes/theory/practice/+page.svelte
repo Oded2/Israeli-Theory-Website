@@ -106,9 +106,16 @@
   </div>
   <div class="divider"></div>
   <div>
-    <button class="btn btn-success btn-outline btn-block" on:click={finish}
-      >Finish</button
-    >
+    {#if isFinished}
+      <button
+        class="btn btn-success btn-outline btn-block"
+        on:click={showResults}>Show Results</button
+      >
+    {:else}
+      <button class="btn btn-success btn-outline btn-block" on:click={finish}
+        >Finish
+      </button>
+    {/if}
   </div>
 </DrawerSide>
 
