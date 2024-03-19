@@ -7,6 +7,7 @@
   import Title from "$lib/components/Title.svelte";
   import Modal from "$lib/components/Modal.svelte";
   import { showModal } from "../../hooks.client";
+  import { hrefs } from "$lib";
 
   export let data;
 
@@ -80,9 +81,11 @@
   </div>
   <div>
     {#if finished}
-      <button class="btn btn-primary w-full" on:click={() => showModal("score")}
-        >Show Result</button
+      <button
+        class="btn btn-primary w-full mb-3"
+        on:click={() => showModal("score")}>Show Result</button
       >
+      <a href={hrefs.home} class="btn btn-primary btn-outline w-full">Home</a>
     {:else}
       <button
         class="btn btn-primary w-full"
