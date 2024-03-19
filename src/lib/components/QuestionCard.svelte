@@ -25,9 +25,10 @@
 
 <div class="card w-full bg-base-300 shadow-xl" dir="auto">
   <div class="card-body">
+    <h3 class="font-medium">{question.category}</h3>
     <h2 class="card-title">{index + 1}. {question.question}</h2>
     {#if finished && !answered}
-      <h3 class="text-error text-sm">Not answered</h3>
+      <h4 class="text-error text-sm">Not answered</h4>
     {/if}
     {#each question.answers as answer}
       <div class="form-control">
