@@ -5,16 +5,21 @@
   import Main from "$lib/components/Main.svelte";
   import { onMount } from "svelte";
   import Title from "$lib/components/Title.svelte";
+  import Modal from "$lib/components/Modal.svelte";
+  import { showModal } from "../../hooks.client";
 
   export let data;
 
   const questions = data.questions;
+  const length: number = questions.length;
   const correct: boolean[] = [];
-  let abc: HTMLElement;
 
   let start: boolean = true;
   let finished: boolean = false;
   let seconds: number = 0;
+  let answered: number = 0;
+  let finalCount: number;
+  let finalScore: number;
 
   onMount(() => {
     timer(2400);
@@ -22,16 +27,26 @@
 
   function submit(): void {
     finished = true;
+    finalCount = countCorrect();
+    finalScore = score();
+    showModal("score");
+  }
+
+  function countCorrect(): number {
+    let count: number = 0;
+    for (let i of correct) if (i) count++;
+    return count;
   }
 
   function score(): number {
-    let count: number = 0;
-    for (let i of correct) if (i) count++;
-    return Math.round((count / questions.length) * 100);
+    return Math.round((countCorrect() / length) * 100);
   }
 
   function timer(maxSec: number): void {
-    if (seconds == maxSec || finished) return;
+    if (seconds == maxSec || finished) {
+      submit();
+      return;
+    }
     setTimeout(() => {
       seconds++;
       timer(maxSec);
@@ -44,7 +59,12 @@
     <div class="md:mx-5">
       {#each questions as question, index}
         <div class="my-10">
-          <Card {question} {index} {finished} bind:correct={correct[index]}
+          <Card
+            {question}
+            {index}
+            {finished}
+            bind:correct={correct[index]}
+            on:answer={() => answered++}
           ></Card>
         </div>
       {/each}
@@ -59,16 +79,41 @@
     </h1>
   </div>
   <div>
-    <button class="btn btn-primary w-full" disabled={finished} on:click={submit}
-      >Finish Test</button
-    >
+    {#if finished}
+      <button class="btn btn-primary w-full" on:click={() => showModal("score")}
+        >Show Result</button
+      >
+    {:else}
+      <button
+        class="btn btn-primary w-full"
+        disabled={finished}
+        on:click={submit}
+        >Finish Test
+      </button>
+    {/if}
   </div>
 </DrawerSide>
 
+<Modal id="score">
+  <div class="text-center p-5">
+    <h1 class="text-3xl font-bold mb-5">
+      Theory Result: <span
+        class:text-success={finalScore >= 80}
+        class:text-error={finalScore < 80}
+        >{finalScore >= 80 ? "Pass" : "Fail"}</span
+      >
+    </h1>
+    <h2 class="text-3xl font-semibold mb-3">
+      {`${finalScore}%`}
+    </h2>
+    <h3 class="text-xl font-semibold">
+      {`You answered ${finalCount} out of ${length} questions correctly`}
+    </h3>
+  </div>
+</Modal>
+
 <FloatElement>
-  <label bind:this={abc} for="drawer" class="btn btn-primary md:hidden"
-    >Info</label
-  >
+  <label for="drawer" class="btn btn-primary md:hidden">Options</label>
 </FloatElement>
 
 <Title title="Practice Test"></Title>

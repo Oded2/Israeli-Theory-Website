@@ -4,6 +4,6 @@
 </script>
 
 <Navbar></Navbar>
-<div class="drawer lg:drawer-open">
+<div class="drawer md:drawer-open">
   <slot />
 </div>

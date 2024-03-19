@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import { simplifyString } from "../../hooks.client";
   export let question: {
     questionNumber: string;
@@ -11,6 +12,8 @@
   export let index: number;
   export let correct: boolean = false;
   export let finished: boolean = false;
+
+  const dispatch = createEventDispatcher();
 
   let val: string;
   let answered: boolean = false;
@@ -43,6 +46,7 @@
           <input
             on:change={() => {
               correct = isSame(answer);
+              if (!answered) dispatch("answer");
               answered = true;
             }}
             type="radio"
