@@ -65,25 +65,24 @@
         >
           <div class="card-actions hidden md:block">
             {#if isFinished}
-              {#if current == length - 1}
+              {#if current === length - 1}
                 <button class="btn btn-primary" on:click={showResults}
                   >Show Results</button
                 >
               {:else}
-                <button class="btn btn-primary" on:click={next}>
-                  {nextText}
-                </button>
+                <button class="btn btn-primary" on:click={next}
+                  >{nextText}</button
+                >
               {/if}
             {:else if !finished[current]}
               <button class="btn btn-primary" on:click={check}
-                >{checkText}
-              </button>
-            {:else if current == length - 1}
+                >{checkText}</button
+              >
+            {:else if current === length - 1}
               <button class="btn btn-primary" on:click={finish}>Finish</button>
             {:else}
-              <button class="btn btn-primary" on:click={next}>
-                {nextText}
-              </button>
+              <button class="btn btn-primary" on:click={next}>{nextText}</button
+              >
             {/if}
           </div>
         </QuestionCard>
@@ -133,12 +132,20 @@
 
 <FloatElement>
   <div class="md:hidden">
-    {#if finished[current]}
-      <button class="btn btn-primary" on:click={next}>
-        {nextText}
-      </button>
+    {#if isFinished}
+      {#if current === length - 1}
+        <button class="btn btn-primary" on:click={showResults}
+          >Show Results</button
+        >
+      {:else}
+        <button class="btn btn-primary" on:click={next}>{nextText}</button>
+      {/if}
+    {:else if !finished[current]}
+      <button class="btn btn-primary" on:click={check}>{checkText}</button>
+    {:else if current === length - 1}
+      <button class="btn btn-primary" on:click={finish}>Finish</button>
     {:else}
-      <button class="btn btn-primary" on:click={check}>{checkText} </button>
+      <button class="btn btn-primary" on:click={next}>{nextText}</button>
     {/if}
     <label for="drawer" class="btn btn-secondary"
       ><i class="fa-solid fa-info"></i></label
