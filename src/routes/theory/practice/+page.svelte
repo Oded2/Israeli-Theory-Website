@@ -6,6 +6,7 @@
   import DrawerSide from "$lib/components/DrawerSide.svelte";
   import { countCorrect, showModal } from "../../../hooks.client.js";
   import Modal from "$lib/components/Modal.svelte";
+  import { hrefs } from "$lib";
 
   export let data;
 
@@ -107,12 +108,13 @@
   <div class="divider"></div>
   <div>
     {#if isFinished}
-      <button
-        class="btn btn-success btn-outline btn-block"
-        on:click={showResults}>Show Results</button
+      <button class="btn btn-success btn-block mb-3" on:click={showResults}
+        >Show Results
+      </button>
+      <a href={hrefs.home} class="btn btn-success btn-block btn-outline">Home</a
       >
     {:else}
-      <button class="btn btn-success btn-outline btn-block" on:click={finish}
+      <button class="btn btn-success btn-block" on:click={finish}
         >Finish
       </button>
     {/if}

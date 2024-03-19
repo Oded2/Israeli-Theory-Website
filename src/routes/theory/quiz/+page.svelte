@@ -72,10 +72,11 @@
   <div>
     {#if finished}
       <button
-        class="btn btn-primary w-full mb-3"
+        class="btn btn-primary btn-block mb-3"
         on:click={() => showModal("score")}>Show Result</button
       >
-      <a href={hrefs.home} class="btn btn-primary btn-outline w-full">Home</a>
+      <a href={hrefs.home} class="btn btn-primary btn-outline btn-block">Home</a
+      >
     {:else}
       <button
         class="btn btn-primary w-full"
