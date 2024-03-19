@@ -44,7 +44,7 @@
 
   function finish(): void {
     isFinished = true;
-    finalScore = countCorrect(correct);
+    finalCount = countCorrect(correct);
     finalScore = Math.round((finalCount / length) * 100);
     showResults();
   }
