@@ -36,7 +36,7 @@
     {#each question.answers as answer}
       <div class="form-control">
         <label
-          class="label justify-start bg-opacity-50"
+          class="label justify-start bg-opacity-50 rounded"
           class:bg-success={finished && isSame(answer)}
           class:bg-error={finished &&
             !correct &&

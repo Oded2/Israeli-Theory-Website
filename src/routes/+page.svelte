@@ -1,6 +1,5 @@
 <script lang="ts">
   import { hrefs } from "$lib";
-  import Container from "$lib/components/Container.svelte";
   import Hero from "$lib/components/Hero.svelte";
   import Main from "$lib/components/Main.svelte";
   import Modal from "$lib/components/Modal.svelte";
@@ -18,7 +17,7 @@
     title="Learn to Drive"
     description="Master the Israeli driver theory without a problem. Practice the test as much times as needed, and come ready for the real thing."
   >
-    <div class="grid grid-flow-col w-2/3 gap-4">
+    <div class="grid grid-flow-col md:w-2/3 gap-4 mb-3">
       <label class="form-control w-full max-w-xs">
         <div class="label">
           <span class="label-text">Language</span>
@@ -51,12 +50,19 @@
         >
       </label>
     </div>
+    <div>
+      <a href={hrefs.github} class="btn btn-ghost"
+        ><i class="fa-brands fa-github"></i> Check out the GitHub</a
+      >
+    </div>
   </Hero>
 </Main>
 
 <Modal id="modal" title="Choose Mode">
   <div class="flex justify-around p-10 gap-4">
-    <button class="btn btn-primary btn-outline w-1/2">Practice</button>
+    <a href={hrefs.practice} class="btn btn-primary btn-outline w-1/2"
+      >Practice</a
+    >
 
     <a
       class="btn btn-primary w-1/2"
