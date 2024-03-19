@@ -4,6 +4,7 @@
   import Hero from "$lib/components/Hero.svelte";
   import Main from "$lib/components/Main.svelte";
   import Modal from "$lib/components/Modal.svelte";
+  import Title from "$lib/components/Title.svelte";
   import learning from "$lib/images/learning.png";
   import { addParamsString, showModal } from "../hooks.client";
 
@@ -63,3 +64,5 @@
     >
   </div>
 </Modal>
+
+<Title title="Home"></Title>

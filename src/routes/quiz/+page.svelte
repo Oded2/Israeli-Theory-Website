@@ -4,6 +4,7 @@
   import FloatElement from "$lib/components/FloatElement.svelte";
   import Main from "$lib/components/Main.svelte";
   import { onMount } from "svelte";
+  import Title from "$lib/components/Title.svelte";
 
   export let data;
 
@@ -16,7 +17,7 @@
   let seconds: number = 0;
 
   onMount(() => {
-    // timer(2400);
+    timer(2400);
   });
 
   function submit(): void {
@@ -53,7 +54,7 @@
 <DrawerSide id="drawer">
   <div class="text-center select-none cursor-default mb-8">
     <h2>Time Left</h2>
-    <h1 class="font-bold text-5xl underline underline-offset-8">
+    <h1 class="font-bold text-4xl underline underline-offset-8">
       {`${(40 - Math.ceil(seconds / 60)).toLocaleString("en", { minimumIntegerDigits: 2 })}:${((60 - (seconds % 60)) % 60).toLocaleString("en", { minimumIntegerDigits: 2 })}`}
     </h1>
   </div>
@@ -69,3 +70,5 @@
     >Info</label
   >
 </FloatElement>
+
+<Title title="Practice Test"></Title>
