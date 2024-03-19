@@ -2,8 +2,6 @@
   export let image: string;
   export let title: string;
   export let description: string;
-  export let btnText: string = "Get Started";
-  export let href: string = "";
 </script>
 
 <div class="hero min-h-screen">
@@ -15,11 +13,6 @@
         {description}
       </p>
       <slot />
-      {#if href.length > 0}
-        <a {href} class="btn btn-primary">{btnText}</a>
-      {:else}
-        <button on:click class="btn btn-primary">{btnText}</button>
-      {/if}
     </div>
   </div>
 </div>

@@ -16,7 +16,7 @@
         <li>
           <details>
             <summary> Theme </summary>
-            <ul class="p-2 bg-base-100 rounded-t-none">
+            <ul class="p-2 bg-base-100 rounded-t-none z-10">
               <li><button data-set-theme="light">Light</button></li>
               <li><button data-set-theme="dark">Dark</button></li>
             </ul>

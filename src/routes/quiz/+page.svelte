@@ -30,8 +30,8 @@
 <main>
   <Container>
     {#if start}
-      <div class="grid grid-cols-4">
-        <div class="col-span-3">
+      <div class="grid md:grid-cols-4">
+        <div class="col-span-4">
           <form on:submit|preventDefault={() => (submit = true)}>
             {#each questions as question, index}
               <div class="my-10">
@@ -46,11 +46,15 @@
             <button class="btn btn-primary" type="submit">Submit</button>
           </form>
         </div>
-        <div class="col-span-1 py-10 px-5">
-          <h1 class="text-center font-bold text-5xl select-none cursor-default">
-            {`${Math.floor(seconds / 60).toLocaleString("en", { minimumIntegerDigits: 2 })}:${(seconds % 60).toLocaleString("en", { minimumIntegerDigits: 2 })}`}
-          </h1>
-        </div>
+        <!-- <div class="col-span-1 py-10 px-5">
+          <div class="fixed bg-red-500">
+            <h1
+              class="text-center font-bold text-5xl select-none cursor-default"
+            >
+              {`${Math.floor(seconds / 60).toLocaleString("en", { minimumIntegerDigits: 2 })}:${(seconds % 60).toLocaleString("en", { minimumIntegerDigits: 2 })}`}
+            </h1>
+          </div>
+        </div> -->
       </div>
     {/if}
   </Container>

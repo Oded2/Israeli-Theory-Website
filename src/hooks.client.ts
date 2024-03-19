@@ -33,3 +33,7 @@ export function shuffleArray<T>(arr: T[], maxLength: number): T[] {
     }
     return newArray;
 }
+export function showModal(id: string) {
+    const modal: any = document.getElementById(id);
+    modal.showModal();
+}
