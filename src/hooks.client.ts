@@ -37,3 +37,9 @@ export function showModal(id: string) {
     const modal: any = document.getElementById(id);
     modal.showModal();
 }
+
+export function countCorrect(arr: boolean[]): number {
+    let count: number = 0;
+    for (let i of arr) if (i) count++;
+    return count;
+}

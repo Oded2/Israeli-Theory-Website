@@ -4,12 +4,14 @@
   import QuestionCard from "$lib/components/QuestionCard.svelte";
   import Main from "$lib/components/Main.svelte";
   import DrawerSide from "$lib/components/DrawerSide.svelte";
+  import { countCorrect, showModal } from "../../../hooks.client.js";
+  import Modal from "$lib/components/Modal.svelte";
 
   export let data;
 
   const { questions, lang } = data;
   const length = questions.length;
-  const submitText =
+  const checkText =
     {
       en: "Check",
       he: "בדוק",
@@ -25,16 +27,29 @@
       ru: "следующий",
       fr: "suivant",
     }[lang] ?? "Next";
-  let score: number = 0;
-  let current: number = 0;
-  let finished: boolean[] = [];
-  let correct: boolean[] = [];
+  const finished: boolean[] = [];
+  const correct: boolean[] = [];
 
-  function submit(): void {
+  let finalCount: number;
+  let finalScore: number;
+  let current: number = 0;
+  let isFinished: boolean = false;
+
+  function check(): void {
     finished[current] = true;
   }
   function next(): void {
     current++;
+  }
+
+  function finish(): void {
+    isFinished = true;
+    finalScore = countCorrect(correct);
+    finalScore = Math.round((finalCount / length) * 100);
+    showResults();
+  }
+  function showResults(): void {
+    showModal("score");
   }
 </script>
 
@@ -46,16 +61,28 @@
           {question}
           {index}
           bind:correct={correct[current]}
-          finished={finished[current]}
+          finished={finished[current] || isFinished}
         >
-          <div class="card-actions justify-end hidden">
-            {#if finished[current]}
+          <div class="card-actions hidden md:block">
+            {#if isFinished}
+              {#if current == length - 1}
+                <button class="btn btn-primary" on:click={showResults}
+                  >Show Results</button
+                >
+              {:else}
+                <button class="btn btn-primary" on:click={next}>
+                  {nextText}
+                </button>
+              {/if}
+            {:else if !finished[current]}
+              <button class="btn btn-primary" on:click={check}
+                >{checkText}
+              </button>
+            {:else if current == length - 1}
+              <button class="btn btn-primary" on:click={finish}>Finish</button>
+            {:else}
               <button class="btn btn-primary" on:click={next}>
                 {nextText}
-              </button>
-            {:else}
-              <button class="btn btn-primary" on:click={submit}
-                >{submitText}
               </button>
             {/if}
           </div>
@@ -71,23 +98,52 @@
     {#each questions as _, index}
       <button
         class="btn btn-circle"
+        class:btn-active={current == index}
         class:btn-success={finished[index] && correct[index]}
         class:btn-error={finished[index] && !correct[index]}
         on:click={() => (current = index)}>{index + 1}</button
       >
     {/each}
   </div>
+  <div class="divider"></div>
+  <div>
+    <button class="btn btn-success btn-outline btn-block" on:click={finish}
+      >Finish</button
+    >
+  </div>
 </DrawerSide>
 
+<Modal id="score">
+  <div class="text-center p-5">
+    <h1 class="text-3xl font-bold mb-5">
+      Practice Result: <span
+        class:text-success={finalScore >= 80}
+        class:text-error={finalScore < 80}
+        >{finalScore >= 80 ? "Pass" : "Fail"}</span
+      >
+    </h1>
+    <h2 class="text-3xl font-semibold mb-3">
+      {`${finalScore}%`}
+    </h2>
+    <h3 class="text-xl font-semibold">
+      {`You answered ${finalCount} out of ${length} questions correctly`}
+    </h3>
+  </div>
+</Modal>
+
 <FloatElement>
-  {#if finished[current]}
-    <button class="btn btn-primary" on:click={next}>
-      {nextText}
-    </button>
-  {:else}
-    <button class="btn btn-primary" on:click={submit}>{submitText} </button>
-  {/if}
-  <label for="drawer" class="btn btn-primary md:hidden">Info</label>
+  <div class="md:hidden">
+    {#if finished[current]}
+      <button class="btn btn-primary" on:click={next}>
+        {nextText}
+      </button>
+    {:else}
+      <button class="btn btn-primary" on:click={check}>{checkText} </button>
+    {/if}
+    <label for="drawer" class="btn btn-secondary"
+      ><i class="fa-solid fa-info"></i></label
+    >
+  </div>
 </FloatElement>
 
 <Title title="Practice"></Title>

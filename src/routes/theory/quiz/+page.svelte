@@ -6,7 +6,7 @@
   import { onMount } from "svelte";
   import Title from "$lib/components/Title.svelte";
   import Modal from "$lib/components/Modal.svelte";
-  import { showModal } from "../../../hooks.client";
+  import { countCorrect, showModal } from "../../../hooks.client";
   import { hrefs } from "$lib";
 
   export let data;
@@ -28,19 +28,9 @@
 
   function submit(): void {
     finished = true;
-    finalCount = countCorrect();
-    finalScore = score();
+    finalCount = countCorrect(correct);
+    finalScore = Math.round((finalCount / length) * 100);
     showModal("score");
-  }
-
-  function countCorrect(): number {
-    let count: number = 0;
-    for (let i of correct) if (i) count++;
-    return count;
-  }
-
-  function score(): number {
-    return Math.round((countCorrect() / length) * 100);
   }
 
   function timer(maxSec: number): void {
@@ -100,7 +90,7 @@
 <Modal id="score">
   <div class="text-center p-5">
     <h1 class="text-3xl font-bold mb-5">
-      Theory Result: <span
+      Test Result: <span
         class:text-success={finalScore >= 80}
         class:text-error={finalScore < 80}
         >{finalScore >= 80 ? "Pass" : "Fail"}</span
