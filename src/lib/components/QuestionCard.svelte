@@ -60,10 +60,11 @@
         </label>
       </div>
     {/each}
+    {#if question.imageUrl.length > 0}
+      <figure>
+        <img src={question.imageUrl} alt="Card" />
+      </figure>
+    {/if}
+    <slot />
   </div>
-  {#if question.imageUrl.length > 0}
-    <figure>
-      <img src={question.imageUrl} alt="Card" />
-    </figure>
-  {/if}
 </div>

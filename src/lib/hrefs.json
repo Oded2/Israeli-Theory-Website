@@ -1,6 +1,6 @@
 {
     "home": "/",
-    "quiz": "/quiz",
-    "practice": "/practice",
+    "quiz": "/theory/quiz",
+    "practice": "/theory/practice",
     "github": "https://github.com/Oded2/Israeli-Theory-Website"
 }

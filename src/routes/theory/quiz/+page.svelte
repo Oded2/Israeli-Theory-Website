@@ -6,12 +6,12 @@
   import { onMount } from "svelte";
   import Title from "$lib/components/Title.svelte";
   import Modal from "$lib/components/Modal.svelte";
-  import { showModal } from "../../hooks.client";
+  import { showModal } from "../../../hooks.client";
   import { hrefs } from "$lib";
 
   export let data;
 
-  const questions = data.questions;
+  const { questions } = data;
   const length: number = questions.length;
   const correct: boolean[] = [];
 

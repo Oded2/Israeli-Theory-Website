@@ -45,10 +45,10 @@
       </label>
       <label for="modal" class="form-control w-full max-w-xs">
         <div class="label"><span class="label-text">&nbsp;</span></div>
-        <!-- <button on:click={() => showModal("modal")} class="btn btn-primary"
+        <button on:click={() => showModal("modal")} class="btn btn-primary"
           >Get Started</button
-        > -->
-        <a href={hrefs.quiz} class="btn btn-primary">Start Test</a>
+        >
+        <!-- <a href={hrefs.quiz} class="btn btn-primary">Start Test</a> -->
       </label>
     </div>
     <div>
@@ -61,8 +61,9 @@
 
 <Modal id="modal" title="Choose Mode">
   <div class="flex justify-around p-10 gap-4">
-    <a href={hrefs.practice} class="btn btn-primary btn-outline w-1/2"
-      >Practice</a
+    <a
+      href={addParamsString(hrefs.practice, { lang, len })}
+      class="btn btn-primary btn-outline w-1/2">Practice</a
     >
 
     <a

@@ -9,7 +9,7 @@
 <div class="navbar bg-base-300">
   <Container>
     <div class="flex-1">
-      <a href={hrefs.home} class="btn btn-ghost text-xl">ilTest</a>
+      <a href={hrefs.home} class="btn btn-ghost text-xl">TheoryIL</a>
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
