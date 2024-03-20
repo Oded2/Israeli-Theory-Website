@@ -26,7 +26,7 @@
   }
 </script>
 
-<div class="card w-full bg-base-300 shadow-xl p-3" dir="auto">
+<div class="card w-full bg-base-300 shadow-xl pb-3" dir="auto">
   <div class="card-body">
     <h3 class="font-medium">{question.category}</h3>
     <h2 class="card-title">{index + 1}. {question.question}</h2>
