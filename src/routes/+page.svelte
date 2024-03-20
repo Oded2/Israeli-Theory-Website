@@ -48,7 +48,6 @@
         <button on:click={() => showModal("modal")} class="btn btn-primary"
           >Get Started</button
         >
-        <!-- <a href={hrefs.quiz} class="btn btn-primary">Start Test</a> -->
       </label>
     </div>
     <div>
