@@ -50,7 +50,7 @@
               answered = true;
             }}
             type="radio"
-            class="radio checked:bg-secondary"
+            class="radio checked:bg-accent"
             disabled={finished}
             bind:group={val}
             value={answer}
