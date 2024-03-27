@@ -101,7 +101,9 @@
 </Modal>
 
 <FloatElement>
-  <label for="drawer" class="btn btn-primary md:hidden">Options</label>
+  <label for="drawer" class="btn btn-accent md:hidden"
+    ><i class="fa-solid fa-info"></i></label
+  >
 </FloatElement>
 
 <Title title="Practice Test"></Title>

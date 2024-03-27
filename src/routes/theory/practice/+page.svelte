@@ -144,7 +144,7 @@
     {:else}
       <button class="btn btn-primary" on:click={next}>{nextText}</button>
     {/if}
-    <label for="drawer" class="btn btn-secondary"
+    <label for="drawer" class="btn btn-primary"
       ><i class="fa-solid fa-info"></i></label
     >
   </div>
