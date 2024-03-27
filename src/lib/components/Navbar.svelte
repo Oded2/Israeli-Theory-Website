@@ -12,7 +12,7 @@
       <a href={hrefs.home} class="btn btn-ghost text-xl">TheoryIL</a>
     </div>
     <div class="flex-none">
-      <ul class="menu menu-horizontal px-1">
+      <ul class="menu menu-horizontal px-1 print:hidden">
         <li>
           <details>
             <summary> Theme </summary>

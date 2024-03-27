@@ -8,6 +8,7 @@
   import Modal from "$lib/components/Modal.svelte";
   import { countCorrect, showModal } from "../../../hooks.client";
   import { hrefs } from "$lib";
+  import Results from "$lib/components/Results.svelte";
 
   export let data;
 
@@ -15,16 +16,13 @@
   const length: number = questions.length;
   const correct: boolean[] = [];
 
-  let start: boolean = true;
   let finished: boolean = false;
   let seconds: number = 0;
   let answered: number = 0;
   let finalCount: number;
   let finalScore: number;
 
-  onMount(() => {
-    timer(2400);
-  });
+  onMount(() => timer(2400));
 
   function submit(): void {
     finished = true;
@@ -46,21 +44,24 @@
 </script>
 
 <Main>
-  {#if start}
-    <div class="md:mx-5">
-      {#each questions as question, index}
-        <div class="my-10">
-          <Card
-            {question}
-            {index}
-            {finished}
-            bind:correct={correct[index]}
-            on:answer={() => answered++}
-          ></Card>
-        </div>
-      {/each}
-    </div>
-  {/if}
+  <div class="md:mx-5">
+    {#if finished}
+      <div class="hidden print:block pt-5">
+        <Results {finalCount} {finalScore} {length}></Results>
+      </div>
+    {/if}
+    {#each questions as question, index}
+      <div class="my-10">
+        <Card
+          {question}
+          {index}
+          {finished}
+          bind:correct={correct[index]}
+          on:answer={() => answered++}
+        ></Card>
+      </div>
+    {/each}
+  </div>
 </Main>
 <DrawerSide id="drawer">
   <div class="text-center select-none cursor-default mb-8">
@@ -73,37 +74,30 @@
     {#if finished}
       <button
         class="btn btn-primary btn-block mb-3"
-        on:click={() => showModal("score")}>Show Result</button
+        on:click={() => showModal("score")}
+        ><i class="fa-solid fa-square-poll-vertical"></i> Show Result</button
       >
-      <a href={hrefs.home} class="btn btn-primary btn-outline btn-block">Home</a
+      <a href={hrefs.home} class="btn btn-primary btn-outline btn-block mb-3"
+        ><i class="fa-solid fa-home"></i> Home
+      </a>
+      <button
+        on:click={() => window.print()}
+        class="btn btn-accent btn-outline btn-block"
+        ><i class="fa-solid fa-print"></i> Print</button
       >
     {:else}
       <button
         class="btn btn-primary w-full"
         disabled={finished}
         on:click={submit}
-        >Finish Test
+        ><i class="fa-solid fa-check"></i> Finish Test
       </button>
     {/if}
   </div>
 </DrawerSide>
 
 <Modal id="score">
-  <div class="text-center p-5">
-    <h1 class="text-3xl font-bold mb-5">
-      Test Result: <span
-        class:text-success={finalScore >= 80}
-        class:text-error={finalScore < 80}
-        >{finalScore >= 80 ? "Pass" : "Fail"}</span
-      >
-    </h1>
-    <h2 class="text-3xl font-semibold mb-3">
-      {`${finalScore}%`}
-    </h2>
-    <h3 class="text-xl font-semibold">
-      {`You answered ${finalCount} out of ${length} questions correctly`}
-    </h3>
-  </div>
+  <Results {finalScore} {finalCount} {length}></Results>
 </Modal>
 
 <FloatElement>

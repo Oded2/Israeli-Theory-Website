@@ -7,6 +7,7 @@
   import { countCorrect, showModal } from "../../../hooks.client.js";
   import Modal from "$lib/components/Modal.svelte";
   import { hrefs } from "$lib";
+  import Results from "$lib/components/Results.svelte";
 
   export let data;
 
@@ -109,34 +110,21 @@
   <div>
     {#if isFinished}
       <button class="btn btn-success btn-block mb-3" on:click={showResults}
-        >Show Results
+        ><i class="fa-solid fa-square-poll-vertical"></i> Show Results
       </button>
-      <a href={hrefs.home} class="btn btn-success btn-block btn-outline">Home</a
+      <a href={hrefs.home} class="btn btn-success btn-block btn-outline"
+        ><i class="fa-solid fa-home"></i> Home</a
       >
     {:else}
       <button class="btn btn-success btn-block" on:click={finish}
-        >Finish
+        ><i class="fa-solid fa-check"></i> Finish
       </button>
     {/if}
   </div>
 </DrawerSide>
 
 <Modal id="score">
-  <div class="text-center p-5">
-    <h1 class="text-3xl font-bold mb-5">
-      Practice Result: <span
-        class:text-success={finalScore >= 80}
-        class:text-error={finalScore < 80}
-        >{finalScore >= 80 ? "Pass" : "Fail"}</span
-      >
-    </h1>
-    <h2 class="text-3xl font-semibold mb-3">
-      {`${finalScore}%`}
-    </h2>
-    <h3 class="text-xl font-semibold">
-      {`You answered ${finalCount} out of ${length} questions correctly`}
-    </h3>
-  </div>
+  <Results {finalScore} {finalCount} {length}></Results>
 </Modal>
 
 <FloatElement>
