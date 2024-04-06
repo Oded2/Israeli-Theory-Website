@@ -22,7 +22,7 @@ The goal of this project is to allow any Israeli to practice the theoretical dri
 - Russian
 - French
 ## Notices
-- Language options are for the questions themeselves, the website itself is in English.
+- Language options are for the questions/answers themeselves, the website itself is in English.
 - Some questions could be incomplete or broken. If you encounter a question like that feel free to contact me.
 - This project is in no way affiliated with the Israeli government.
 ## Run Locally
