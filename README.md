@@ -9,7 +9,7 @@ The goal of this project is to allow any Israeli to practice the theoretical dri
 
 ## Features
 
-- Light/Dark color themes
+- Light/Dark themes
 - Practice and test modes
 - Language selection
 - Result printing
